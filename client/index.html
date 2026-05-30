@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>My Multiplayer Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      touch-action: none;
+    }
+
+    #canvas-container {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    #ui-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #ui-container > * {
+      pointer-events: auto;
+    }
+
+    #chat-box {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      max-width: 90%;
+      max-height: 200px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+      color: #fff;
+      font-family: monospace;
+      font-size: 13px;
+      max-height: 150px;
+      min-height: 30px;
+    }
+
+    #chat-messages .chat-line {
+      margin-bottom: 2px;
+      word-break: break-word;
+    }
+
+    #chat-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 8px 10px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    #chat-input::placeholder {
+      color: #888;
+    }
+
+    #joystick-container {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      touch-action: none;
+    }
+
+    #joystick-knob {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      touch-action: none;
+      position: relative;
+    }
+
+    @media (pointer: coarse) {
+      #joystick-container {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas-container"></div>
+  <div id="ui-container">
+    <div id="chat-box">
+      <div id="chat-messages"></div>
+      <input id="chat-input" type="text" placeholder="Chat..." />
+    </div>
+    <div id="joystick-container">
+      <div id="joystick-knob"></div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/colyseus.js/0.15.11/colyseus.min.js"
+    integrity="sha512-OowgjsA1re3qLFN5tV5MLsANXFnL8Kh7GWLN8AXcI3V1QKV2byQrf5P6gBmjjpXCQ75qLGU2teu1z/iqOy3Ycg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
